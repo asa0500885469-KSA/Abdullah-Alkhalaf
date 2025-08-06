@@ -1,2 +1,0 @@
-# Abdullah-Alkhalaf
-Resume

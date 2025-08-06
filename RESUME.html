@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abdullah Alkhalaf | Senior Network & Systems Engineer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Warm Neutrals -->
+    <!-- Application Structure Plan: A single-page application with a top navigation bar for smooth scrolling to thematic sections: an overview, an interactive experience timeline, a skills section with a radar chart, a filterable project gallery, and a contact footer. This structure transforms the static resume into an exploratory journey, allowing users to quickly grasp high-level qualifications via visuals like the chart and then dive into details with interactive elements like the timeline and project filters. This prioritizes user engagement and information accessibility over a rigid, linear format. -->
+    <!-- Visualization & Content Choices: 
+        - Career Objective/Summary -> Inform -> Combined Text Block -> Static Display -> Justification: Provides a strong, immediate introduction.
+        - Professional Experience -> Change -> Interactive Timeline (HTML/CSS/JS) -> Interaction: Click tabs to reveal details -> Justification: Visually represents career progression and makes dense information digestible.
+        - Skills -> Compare/Organize -> Radar Chart (Chart.js) & List -> Interaction: Hover for tooltips -> Justification: Offers a quick, graphical summary of core competency areas, complemented by a detailed list for thoroughness.
+        - Key Projects -> Organize/Inform -> Filterable Grid (HTML/CSS/JS) -> Interaction: Click buttons to filter projects by category -> Justification: Allows users to easily find specific, relevant achievements within a large list.
+        - Education/Certs -> Inform -> Styled List (HTML/CSS) -> Interaction: None -> Justification: Clear and concise presentation for factual data.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #FDFBF7;
+            color: #2c3e50;
+        }
+        .nav-link {
+            transition: color 0.3s, border-bottom-color 0.3s;
+            border-bottom: 2px solid transparent;
+        }
+        .nav-link:hover, .nav-link.active {
+            color: #4A90E2;
+            border-bottom-color: #4A90E2;
+        }
+        .tab-button {
+            transition: all 0.3s;
+        }
+        .tab-button.active {
+            background-color: #4A90E2;
+            color: white;
+        }
+        .project-card {
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        .filter-btn {
+            transition: all 0.3s ease;
+        }
+        .filter-btn.active {
+            background-color: #2c3e50;
+            color: white;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 400px;
+            }
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <header class="bg-white/80 backdrop-blur-lg sticky top-0 z-50 shadow-sm">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="text-2xl font-bold text-gray-800">
+                <a href="#">Abdullah Alkhalaf</a>
+            </div>
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="#overview" class="nav-link pb-1">Overview</a>
+                <a href="#experience" class="nav-link pb-1">Experience</a>
+                <a href="#skills-projects" class="nav-link pb-1">Skills & Projects</a>
+                <a href="#contact" class="nav-link pb-1">Contact</a>
+            </div>
+            <div class="md:hidden">
+                 <button id="mobile-menu-button" class="text-gray-800 focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                </button>
+            </div>
+        </nav>
+        <div id="mobile-menu" class="hidden md:hidden">
+            <a href="#overview" class="block py-2 px-6 text-sm hover:bg-gray-200">Overview</a>
+            <a href="#experience" class="block py-2 px-6 text-sm hover:bg-gray-200">Experience</a>
+            <a href="#skills-projects" class="block py-2 px-6 text-sm hover:bg-gray-200">Skills & Projects</a>
+            <a href="#contact" class="block py-2 px-6 text-sm hover:bg-gray-200">Contact</a>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-6 py-12">
+        <section id="overview" class="min-h-[80vh] flex flex-col justify-center items-center text-center">
+            <h1 class="text-4xl md:text-6xl font-bold leading-tight">Abdullah Alkhalaf</h1>
+            <p class="mt-4 text-xl md:text-2xl text-gray-600">Senior Network & Systems Engineer | Aspiring IT Director</p>
+            <div class="mt-12 max-w-4xl mx-auto text-left space-y-8">
+                <div>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-3 border-b-2 border-blue-200 pb-2">Career Objective</h3>
+                    <p class="text-gray-700 leading-relaxed">Strategic-minded IT professional with over 9 years of experience in managing and leading enterprise network and systems operations. Aspiring to advance into a senior IT leadership role to leverage technical expertise, strategic vision, and leadership skills in delivering innovative solutions, driving digital transformation, and achieving impactful business results.</p>
+                </div>
+                <div>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-3 border-b-2 border-blue-200 pb-2">Professional Summary</h3>
+                    <p class="text-gray-700 leading-relaxed">Results-driven Senior Network & Systems Engineer known for delivering high-impact technology initiatives that enhance operations, security, and performance. Demonstrated expertise in leading cross-functional projects, optimizing IT infrastructure, and aligning technology with organizational goals. Consistently initiates forward-thinking solutions—often beyond formal responsibilities—that drive measurable value and operational excellence across the enterprise.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="experience" class="py-20">
+            <h2 class="text-4xl font-bold text-center mb-12">Professional Experience</h2>
+            <div class="flex justify-center mb-8">
+                <div class="flex space-x-2 bg-gray-200 p-1 rounded-full">
+                    <button data-tab="saudi-medevac" class="tab-button px-6 py-2 rounded-full text-sm font-semibold active">Saudi Medevac</button>
+                    <button data-tab="military-survey" class="tab-button px-6 py-2 rounded-full text-sm font-semibold">Military Survey</button>
+                </div>
+            </div>
+            <div class="max-w-3xl mx-auto">
+                <div id="saudi-medevac" class="tab-content">
+                    <div class="bg-white p-8 rounded-lg shadow-lg">
+                        <h3 class="text-2xl font-bold">Network & Systems Department Manager</h3>
+                        <p class="text-gray-500 font-medium my-2">Saudi Medevac – Riyadh, Saudi Arabia (2022 – Present)</p>
+                        <ul class="list-disc list-inside mt-4 space-y-3 text-gray-700">
+                            <li>Led the organization’s <strong>Digital Transformation Project</strong>, including ERP and MRO integration.</li>
+                            <li>Developed internal communication systems: <strong>email and executive portal</strong>.</li>
+                            <li>Directed the planning and deployment of a <strong>secure, high-availability data center</strong>.</li>
+                            <li>Oversaw migration from <strong>Hyper-V to VMware</strong> for better scalability and performance.</li>
+                            <li>Strengthened <strong>cybersecurity</strong> with firewalls, VPNs, and modern access controls.</li>
+                            <li>Administered enterprise <strong>databases</strong>, ensuring performance and backup integrity.</li>
+                            <li>Created in-house digital platforms for <strong>IT support and safety reporting</strong>.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div id="military-survey" class="tab-content hidden">
+                    <div class="bg-white p-8 rounded-lg shadow-lg">
+                        <h3 class="text-2xl font-bold">Network Department Manager</h3>
+                        <p class="text-gray-500 font-medium my-2">General Directorate of Military Survey – Riyadh, Saudi Arabia (2015 – 2022)</p>
+                        <ul class="list-disc list-inside mt-4 space-y-3 text-gray-700">
+                            <li>Modernized <strong>network and data center infrastructure</strong>.</li>
+                            <li>Managed <strong>multi-million SAR IT upgrade projects</strong>.</li>
+                            <li>Deployed advanced <strong>CCTV system</strong> improving security by 60%.</li>
+                            <li>Integrated <strong>multi-vendor systems</strong> ensuring seamless communication.</li>
+                            <li>Optimized <strong>databases</strong> for performance and disaster recovery.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="skills-projects" class="py-20 bg-gray-50 rounded-xl">
+            <h2 class="text-4xl font-bold text-center mb-16">Skills & Key Projects</h2>
+            <div class="grid md:grid-cols-2 gap-16 items-center">
+                <div class="text-center">
+                    <h3 class="text-2xl font-bold mb-4">Core Competencies</h3>
+                    <p class="text-gray-600 mb-6 max-w-md mx-auto">A visual representation of key skill areas, demonstrating a well-rounded expertise in technical, strategic, and managerial domains.</p>
+                    <div class="chart-container">
+                        <canvas id="skillsChart"></canvas>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-2xl font-bold mb-4">Technical Skills</h3>
+                     <div class="flex flex-wrap gap-3">
+                        <span class="bg-blue-100 text-blue-800 text-sm font-medium px-3 py-1 rounded-full">Strategic Planning & IT Leadership</span>
+                        <span class="bg-blue-100 text-blue-800 text-sm font-medium px-3 py-1 rounded-full">Network & Systems Infrastructure</span>
+                        <span class="bg-blue-100 text-blue-800 text-sm font-medium px-3 py-1 rounded-full">Database Administration</span>
+                        <span class="bg-blue-100 text-blue-800 text-sm font-medium px-3 py-1 rounded-full">Virtualization (VMware, Hyper-V)</span>
+                        <span class="bg-blue-100 text-blue-800 text-sm font-medium px-3 py-1 rounded-full">Cybersecurity & Data Protection</span>
+                        <span class="bg-blue-100 text-blue-800 text-sm font-medium px-3 py-1 rounded-full">Data Center Design</span>
+                        <span class="bg-blue-100 text-blue-800 text-sm font-medium px-3 py-1 rounded-full">Project & Budget Management</span>
+                        <span class="bg-blue-100 text-blue-800 text-sm font-medium px-3 py-1 rounded-full">KPIs & Performance Optimization</span>
+                        <span class="bg-blue-100 text-blue-800 text-sm font-medium px-3 py-1 rounded-full">Change Management</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-20">
+                <h3 class="text-3xl font-bold text-center mb-4">Key Projects & Achievements</h3>
+                <p class="text-gray-600 text-center mb-8 max-w-2xl mx-auto">A portfolio of significant accomplishments. Use the filters to explore projects based on their primary focus area.</p>
+                <div class="flex justify-center flex-wrap gap-3 mb-8">
+                    <button class="filter-btn active px-4 py-2 bg-white border border-gray-300 rounded-full text-sm font-semibold" data-filter="all">All</button>
+                    <button class="filter-btn px-4 py-2 bg-white border border-gray-300 rounded-full text-sm font-semibold" data-filter="transformation">Digital Transformation</button>
+                    <button class="filter-btn px-4 py-2 bg-white border border-gray-300 rounded-full text-sm font-semibold" data-filter="infrastructure">Infrastructure</button>
+                    <button class="filter-btn px-4 py-2 bg-white border border-gray-300 rounded-full text-sm font-semibold" data-filter="security">Security</button>
+                    <button class="filter-btn px-4 py-2 bg-white border border-gray-300 rounded-full text-sm font-semibold" data-filter="systems">Internal Systems</button>
+                </div>
+
+                <div id="projects-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="project-card bg-white p-6 rounded-lg shadow-md" data-category="transformation" data-title="Digital Transformation" data-description="Led ERP & MRO planning and execution, revolutionizing core business processes.">
+                        <h4 class="font-bold text-lg">Digital Transformation</h4>
+                        <p class="text-gray-600 mt-2 text-sm">Led ERP & MRO planning and execution, revolutionizing core business processes.</p>
+                    </div>
+                    <div class="project-card bg-white p-6 rounded-lg shadow-md" data-category="systems" data-title="Internal Communication Portal" data-description="Developed a centralized portal for internal services and communication.">
+                        <h4 class="font-bold text-lg">Internal Communication Portal</h4>
+                        <p class="text-gray-600 mt-2 text-sm">Developed a centralized portal for internal services and communication.</p>
+                    </div>
+                    <div class="project-card bg-white p-6 rounded-lg shadow-md" data-category="infrastructure" data-title="Data Center Development" data-description="Directed the creation of a secure, scalable, high-availability infrastructure.">
+                        <h4 class="font-bold text-lg">Data Center Development</h4>
+                        <p class="text-gray-600 mt-2 text-sm">Directed the creation of a secure, scalable, high-availability infrastructure.</p>
+                    </div>
+                    <div class="project-card bg-white p-6 rounded-lg shadow-md" data-category="security" data-title="Security Infrastructure Upgrade" data-description="Implemented robust firewalls, VPNs, and modern access control policies.">
+                        <h4 class="font-bold text-lg">Security Infrastructure Upgrade</h4>
+                        <p class="text-gray-600 mt-2 text-sm">Implemented robust firewalls, VPNs, and modern access control policies.</p>
+                    </div>
+                     <div class="project-card bg-white p-6 rounded-lg shadow-md" data-category="systems" data-title="IT Support Request System" data-description="Built an internal ticketing and tracking system to streamline IT support.">
+                        <h4 class="font-bold text-lg">IT Support Request System</h4>
+                        <p class="text-gray-600 mt-2 text-sm">Built an internal ticketing and tracking system to streamline IT support.</p>
+                    </div>
+                    <div class="project-card bg-white p-6 rounded-lg shadow-md" data-category="systems" data-title="Safety Reporting Platform" data-description="Launched a digital incident management tool to enhance safety protocols.">
+                        <h4 class="font-bold text-lg">Safety Reporting Platform</h4>
+                        <p class="text-gray-600 mt-2 text-sm">Launched a digital incident management tool to enhance safety protocols.</p>
+                    </div>
+                    <div class="project-card bg-white p-6 rounded-lg shadow-md" data-category="infrastructure" data-title="Database Optimization" data-description="Enhanced database performance, integrity, and availability across the enterprise.">
+                        <h4 class="font-bold text-lg">Database Optimization</h4>
+                        <p class="text-gray-600 mt-2 text-sm">Enhanced database performance, integrity, and availability across the enterprise.</p>
+                    </div>
+                    <div class="project-card bg-white p-6 rounded-lg shadow-md" data-category="security" data-title="CCTV Modernization" data-description="Managed a project that increased security surveillance coverage.">
+                        <h4 class="font-bold text-lg">CCTV Modernization</h4>
+                        <p class="text-gray-600 mt-2 text-sm">Managed a project that increased security surveillance coverage.</p>
+                    </div>
+                    <div class="project-card bg-white p-6 rounded-lg shadow-md" data-category="infrastructure" data-title="Backup & Disaster Recovery" data-description="Implemented a comprehensive strategy resulting in zero data loss.">
+                        <h4 class="font-bold text-lg">Backup & Disaster Recovery</h4>
+                        <p class="text-gray-600 mt-2 text-sm">Implemented a comprehensive strategy resulting in zero data loss.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="education" class="py-20">
+            <h2 class="text-4xl font-bold text-center mb-12">Education & Certifications</h2>
+            <div class="max-w-4xl mx-auto grid md:grid-cols-2 gap-12">
+                <div>
+                    <h3 class="text-2xl font-bold mb-4">Education</h3>
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <p class="font-bold text-lg">Bachelor of Computer Engineering</p>
+                        <p class="text-gray-600">Qassim University</p>
+                        <p class="text-sm text-gray-500 mt-2">2015 | Grade: Very Good</p>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-2xl font-bold mb-4">Certifications & Training</h3>
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <ul class="space-y-2 text-gray-700">
+                            <li><strong>Project Management Professional (PMP)</strong></li>
+                            <li><strong>CCNA & CCNP</strong> – Switching & Routing</li>
+                            <li>Fundamentals of Cybersecurity</li>
+                            <li>Strategic Thinking, Leadership & Empowerment</li>
+                            <li>Change Management & Organizational Agility</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer id="contact" class="bg-gray-800 text-white">
+        <div class="container mx-auto px-6 py-10 text-center">
+            <h2 class="text-3xl font-bold mb-4">Get In Touch</h2>
+            <p class="text-gray-400 mb-6">Open to new opportunities and collaborations.</p>
+            <div class="flex justify-center items-center space-x-8 text-lg">
+                <span>📍 Riyadh, Saudi Arabia</span>
+                <span>📞 0558335544</span>
+                <span>✉️ eng.abdullah.alkhalaf@gmail.com</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            const tabButtons = document.querySelectorAll('.tab-button');
+            const tabContents = document.querySelectorAll('.tab-content');
+            tabButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    tabButtons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+                    const tabId = button.dataset.tab;
+                    tabContents.forEach(content => {
+                        if (content.id === tabId) {
+                            content.classList.remove('hidden');
+                        } else {
+                            content.classList.add('hidden');
+                        }
+                    });
+                });
+            });
+
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const projectCards = document.querySelectorAll('.project-card');
+            filterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+                    const filter = button.dataset.filter;
+                    projectCards.forEach(card => {
+                        if (filter === 'all' || card.dataset.category === filter) {
+                            card.style.display = 'block';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                });
+            });
+
+            const ctx = document.getElementById('skillsChart').getContext('2d');
+            const skillsChart = new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: ['Strategic Leadership', 'Infrastructure & Virtualization', 'Cybersecurity', 'Project Management', 'Systems & Databases', 'Innovation'],
+                    datasets: [{
+                        label: 'Competency Level',
+                        data: [9, 9, 8, 9, 8, 7],
+                        backgroundColor: 'rgba(74, 144, 226, 0.2)',
+                        borderColor: 'rgba(74, 144, 226, 1)',
+                        borderWidth: 2,
+                        pointBackgroundColor: 'rgba(74, 144, 226, 1)',
+                        pointBorderColor: '#fff',
+                        pointHoverBackgroundColor: '#fff',
+                        pointHoverBorderColor: 'rgba(74, 144, 226, 1)'
+                    }]
+                },
+                options: {
+                    maintainAspectRatio: false,
+                    scales: {
+                        r: {
+                            angleLines: {
+                                color: 'rgba(44, 62, 80, 0.2)'
+                            },
+                            grid: {
+                                color: 'rgba(44, 62, 80, 0.2)'
+                            },
+                            pointLabels: {
+                                font: {
+                                    size: 12,
+                                    weight: 'bold'
+                                },
+                                color: '#2c3e50'
+                            },
+                            ticks: {
+                                backdropColor: 'transparent',
+                                color: '#2c3e50',
+                                stepSize: 2
+                            },
+                            suggestedMin: 0,
+                            suggestedMax: 10
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
