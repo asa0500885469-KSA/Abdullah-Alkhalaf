@@ -80,12 +80,20 @@
             border-radius: 1rem;
             text-align: center;
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            max-width: 90%;
         }
         .language-button {
             transition: all 0.2s;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
         }
         .language-button:hover {
-            transform: scale(1.05);
+            transform: scale(1.02);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        @media (min-width: 768px) {
+            #language-modal-content {
+                max-width: 500px;
+            }
         }
     </style>
 </head>
@@ -94,13 +102,14 @@
     <!-- Language Selection Modal -->
     <div id="language-modal" class="font-sans">
         <div id="language-modal-content" class="max-w-md mx-auto">
-            <h2 class="text-3xl font-bold mb-4">Select a Language</h2>
+            <img src="https://photos.app.goo.gl/9pLbQap8mVbYWNT98" alt="Abdullah Alkhalaf's Photo" class="rounded-full mx-auto mb-4">
+            <h1 class="text-3xl font-bold mb-2">Abdullah Alkhalaf</h1>
             <p class="text-gray-600 mb-8">اختر لغة العرض للسيرة الذاتية</p>
             <div class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-6">
-                <button id="lang-en" class="language-button w-full md:w-1/2 bg-blue-500 text-white font-bold py-3 px-6 rounded-lg shadow-md">
+                <button id="lang-en" class="language-button w-full md:w-1/2 bg-blue-500 text-white font-bold py-3 px-6 rounded-lg">
                     English
                 </button>
-                <button id="lang-ar" class="language-button w-full md:w-1/2 bg-gray-600 text-white font-bold py-3 px-6 rounded-lg shadow-md">
+                <button id="lang-ar" class="language-button w-full md:w-1/2 bg-gray-600 text-white font-bold py-3 px-6 rounded-lg">
                     العربية
                 </button>
             </div>
@@ -300,7 +309,7 @@
             <div class="container mx-auto px-6 py-10 text-center">
                 <h2 class="text-3xl font-bold mb-4" data-key="contact-title">Get In Touch</h2>
                 <p class="text-gray-400 mb-6" data-key="contact-desc">Open to new opportunities and collaborations.</p>
-                <div class="flex justify-center items-center space-x-8 text-lg">
+                <div class="flex justify-center items-center flex-wrap gap-x-8 gap-y-4 text-lg">
                     <span data-key="contact-location">📍 Riyadh, Saudi Arabia</span>
                     <span data-key="contact-phone">📞 0558335544</span>
                     <span data-key="contact-email">✉️ eng.abdullah.alkhalaf@gmail.com</span>
