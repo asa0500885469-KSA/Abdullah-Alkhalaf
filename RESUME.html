@@ -88,10 +88,23 @@
         .language-button {
             transition: all 0.2s;
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            border: 2px solid transparent;
         }
         .language-button:hover {
             transform: scale(1.02);
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        .language-button.selected {
+            border-color: #4A90E2;
+            background-color: #EFF6FF;
+            color: #2c3e50;
+        }
+        .confirm-btn {
+            transition: transform 0.2s, background-color 0.2s;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+        .confirm-btn:hover {
+            transform: translateY(-2px);
+            background-color: #3b74b6;
         }
         @media (min-width: 768px) {
             #language-modal-content {
@@ -105,17 +118,20 @@
     <!-- Language Selection Modal -->
     <div id="language-modal" class="font-sans">
         <div id="language-modal-content" class="max-w-md mx-auto">
-            <img src="https://imgur.com/a/5jApmaE" alt="Abdullah Alkhalaf's Photo" class="rounded-full mx-auto mb-4">
+            <img src="https://placehold.co/128x128/4A90E2/FFFFFF/png?text=AA" alt="Abdullah Alkhalaf's Photo" class="rounded-full mx-auto mb-4">
             <h1 class="text-3xl font-bold mb-2">Abdullah Alkhalaf</h1>
-            <p class="text-gray-600 mb-8">اختر لغة العرض للسيرة الذاتية</p>
-            <div class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-6">
-                <button id="lang-en" class="language-button w-full md:w-1/2 bg-blue-500 text-white font-bold py-3 px-6 rounded-lg">
+            <p id="modal-text" class="text-gray-600 mb-8">Please choose a language for the resume</p>
+            <div class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-6 mb-6">
+                <button id="lang-en" class="language-button w-full md:w-1/2 bg-white text-gray-800 font-bold py-3 px-6 rounded-lg">
                     English
                 </button>
-                <button id="lang-ar" class="language-button w-full md:w-1/2 bg-gray-600 text-white font-bold py-3 px-6 rounded-lg">
+                <button id="lang-ar" class="language-button w-full md:w-1/2 bg-white text-gray-800 font-bold py-3 px-6 rounded-lg">
                     العربية
                 </button>
             </div>
+            <button id="confirm-lang-button" class="confirm-btn w-full bg-blue-500 text-white font-bold py-3 px-6 rounded-lg hidden">
+                Confirm
+            </button>
         </div>
     </div>
 
@@ -327,6 +343,8 @@
             // Language data object with all translations
             const languageData = {
                 'en': {
+                    'modal-text': 'Please choose a language for the resume',
+                    'confirm-btn': 'Confirm',
                     'name': 'Abdullah Alkhalaf',
                     'title': 'Senior Network & Systems Engineer | Aspiring IT Director',
                     'nav-overview': 'Overview',
@@ -413,6 +431,8 @@
                     'chartLabels': ['Strategic Leadership', 'Infrastructure & Virtualization', 'Cybersecurity', 'Project Management', 'Systems & Databases', 'Innovation']
                 },
                 'ar': {
+                    'modal-text': 'الرجاء اختيار لغة السيرة الذاتية',
+                    'confirm-btn': 'تأكيد',
                     'name': 'عبدالله الخلف',
                     'title': 'مهندس شبكات وأنظمة أول | مدير تقنية معلومات طموح',
                     'nav-overview': 'نظرة عامة',
@@ -499,7 +519,10 @@
                     'chartLabels': ['القيادة الاستراتيجية', 'البنية التحتية والافتراضية', 'الأمن السيبراني', 'إدارة المشاريع', 'الأنظمة وقواعد البيانات', 'الابتكار']
                 }
             };
-            
+
+            // Global variables to hold the selected language
+            let selectedLanguage = 'en';
+
             // Function to update all content based on selected language
             function updateLanguage(lang) {
                 // Set page direction for RTL languages
@@ -509,7 +532,6 @@
                 document.querySelectorAll('[data-key]').forEach(element => {
                     const key = element.dataset.key;
                     if (languageData[lang][key]) {
-                        // Use innerHTML for text with formatting like <strong>
                         element.innerHTML = languageData[lang][key];
                     }
                 });
@@ -524,19 +546,40 @@
             const resumeContent = document.getElementById('resume-content');
             const langEnButton = document.getElementById('lang-en');
             const langArButton = document.getElementById('lang-ar');
+            const confirmButton = document.getElementById('confirm-lang-button');
+            const modalText = document.getElementById('modal-text');
+            const languageButtons = document.querySelectorAll('.language-button');
 
-            // Language button event listeners
-            langEnButton.addEventListener('click', () => {
-                updateLanguage('en');
+            // Handle language button clicks
+            languageButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    // Remove 'selected' class from all buttons
+                    languageButtons.forEach(btn => btn.classList.remove('selected'));
+                    // Add 'selected' class to the clicked button
+                    button.classList.add('selected');
+
+                    selectedLanguage = button.id === 'lang-en' ? 'en' : 'ar';
+                    
+                    // Show the confirm button after a language is selected
+                    confirmButton.classList.remove('hidden');
+
+                    // Update modal text for confirmation
+                    if (selectedLanguage === 'en') {
+                        modalText.textContent = "You have selected English. Press Confirm to continue.";
+                        confirmButton.textContent = "Confirm";
+                    } else {
+                        modalText.textContent = "لقد اخترت اللغة العربية. اضغط تأكيد للمتابعة.";
+                        confirmButton.textContent = "تأكيد";
+                    }
+                });
+            });
+            
+            // Handle confirm button click
+            confirmButton.addEventListener('click', () => {
+                updateLanguage(selectedLanguage);
                 languageModal.classList.add('hidden');
                 resumeContent.classList.remove('hidden');
             });
-            langArButton.addEventListener('click', () => {
-                updateLanguage('ar');
-                languageModal.classList.add('hidden');
-                resumeContent.classList.remove('hidden');
-            });
-
 
             // --- Existing JavaScript from previous version ---
 
