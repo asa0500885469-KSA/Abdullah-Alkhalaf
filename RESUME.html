@@ -118,8 +118,8 @@
     <!-- Language Selection Modal -->
     <div id="language-modal" class="font-sans">
         <div id="language-modal-content" class="max-w-md mx-auto">
-            <!-- Image for the modal, updated with the same URL -->
-            <img src="https://i.imgur.com/w9oOD9l.jpeg" alt="Abdullah Alkhalaf's Photo" class="rounded-full mx-auto mb-4 w-32 h-32 object-cover">
+            <!-- Image for the modal, increased size -->
+            <img src="https://i.imgur.com/w9oOD9l.jpeg" alt="Abdullah Alkhalaf's Photo" class="rounded-full mx-auto mb-4 w-40 h-40 object-cover">
             <h1 class="text-3xl font-bold mb-2">Abdullah Alkhalaf</h1>
             <p id="modal-text" class="text-gray-600 mb-8">Please choose a language for the resume</p>
             <div class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-6 mb-6">
@@ -141,17 +141,17 @@
 
         <header class="bg-white/80 backdrop-blur-lg sticky top-0 z-50 shadow-sm">
             <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
-                <!-- Image for the navigation header -->
-                <div class="text-2xl font-bold text-gray-800" data-key="name">
-                    <a href="#">
-                        <img src="https://i.imgur.com/w9oOD9l.jpeg" alt="Abdullah Alkhalaf's Photo" class="w-10 h-10 rounded-full object-cover">
+                <!-- Image for the navigation header, increased size -->
+                <div class="text-2xl font-bold text-gray-800">
+                    <a href="#overview">
+                        <img src="https://i.imgur.com/w9oOD9l.jpeg" alt="Abdullah Alkhalaf's Photo" class="w-12 h-12 rounded-full object-cover">
                     </a>
                 </div>
-                <div class="hidden md:flex items-center space-x-8">
-                    <a href="#overview" class="nav-link pb-1" data-key="nav-overview">Overview</a>
-                    <a href="#experience" class="nav-link pb-1" data-key="nav-experience">Experience</a>
-                    <a href="#skills-projects" class="nav-link pb-1" data-key="nav-skills">Skills & Projects</a>
-                    <a href="#contact" class="nav-link pb-1" data-key="nav-contact">Contact</a>
+                <div class="hidden md:flex items-center space-x-6">
+                    <a href="#overview" class="nav-link font-semibold pb-1" data-key="nav-overview">Overview</a>
+                    <a href="#experience" class="nav-link font-semibold pb-1" data-key="nav-experience">Experience</a>
+                    <a href="#skills-projects" class="nav-link font-semibold pb-1" data-key="nav-skills">Skills & Projects</a>
+                    <a href="#contact" class="nav-link font-semibold pb-1" data-key="nav-contact">Contact</a>
                 </div>
                 <div class="md:hidden">
                     <button id="mobile-menu-button" class="text-gray-800 focus:outline-none">
@@ -282,20 +282,14 @@
                         </div>
                         <div class="project-card bg-white p-6 rounded-lg shadow-md" data-category="infrastructure">
                             <h4 class="font-bold text-lg" data-key="project-title-6">Virtualization Migration</h4>
-                            <p class="text-gray-600 mt-2 text-sm" data-key="project-desc-6">Managed the migration of all servers from Hyper-V to VMware for improved performance and management.</p>
-                        </div>
-                        <div class="project-card bg-white p-6 rounded-lg shadow-md" data-category="infrastructure">
-                            <h4 class="font-bold text-lg" data-key="project-title-7">Network & Data Center Modernization</h4>
-                            <p class="text-gray-600 mt-2 text-sm" data-key="project-desc-7">Upgraded the entire network and data center infrastructure for the General Directorate of Military Survey.</p>
-                        </div>
-                        <div class="project-card bg-white p-6 rounded-lg shadow-md" data-category="security">
-                            <h4 class="font-bold text-lg" data-key="project-title-8">Advanced CCTV System Implementation</h4>
-                            <p class="text-gray-600 mt-2 text-sm" data-key="project-desc-8">Supervised the installation of a comprehensive CCTV system to enhance security protocols.</p>
-                        </div>
-                        <div class="project-card bg-white p-6 rounded-lg shadow-md" data-category="systems">
-                            <h4 class="font-bold text-lg" data-key="project-title-9">Land Surveying Maps System</h4>
-                            <p class="text-gray-600 mt-2 text-sm" data-key="project-desc-9">Led the project to implement a new digital system for military land surveying maps.</p>
-                        </div>
+                                        <p class="text-gray-600 mt-2 text-sm" data-key="project-desc-6">Managed the migration of all servers from Hyper-V to VMware for improved performance and management.</p>
+                                        <h4 class="font-bold text-lg" data-key="project-title-7">Network & Data Center Modernization</h4>
+                                        <p class="text-gray-600 mt-2 text-sm" data-key="project-desc-7">Upgraded the entire network and data center infrastructure for the General Directorate of Military Survey.</p>
+                                        <h4 class="font-bold text-lg" data-key="project-title-8">Advanced CCTV System Implementation</h4>
+                                        <p class="text-gray-600 mt-2 text-sm" data-key="project-desc-8">Supervised the installation of a comprehensive CCTV system to enhance security protocols.</p>
+                                        <h4 class="font-bold text-lg" data-key="project-title-9">Land Surveying Maps System</h4>
+                                        <p class="text-gray-600 mt-2 text-sm" data-key="project-desc-9">Led the project to implement a new digital system for military land surveying maps.</p>
+                                        </div>
                     </div>
                 </div>
             </section>
@@ -414,13 +408,13 @@
                     'project-title-5': 'IT Support & Safety Systems',
                     'project-desc-5': 'Created an internal technical support system and a digital safety incident reporting platform.',
                     'project-title-6': 'Virtualization Migration',
-                    'project-desc-6': 'Managed the migration of all servers from Hyper-V to VMware for improved performance and management.',
-                    'project-title-7': 'Network & Data Center Modernization',
-                    'project-desc-7': 'Upgraded the entire network and data center infrastructure for the General Directorate of Military Survey.',
-                    'project-title-8': 'Advanced CCTV System Implementation',
-                    'project-desc-8': 'Supervised the installation of a comprehensive CCTV system to enhance security protocols.',
-                    'project-title-9': 'Land Surveying Maps System',
-                    'project-desc-9': 'Led the project to implement a new digital system for military land surveying maps.',
+                                        'project-desc-6': 'Managed the migration of all servers from Hyper-V to VMware for improved performance and management.',
+                                        'project-title-7': 'Network & Data Center Modernization',
+                                        'project-desc-7': 'Upgraded the entire network and data center infrastructure for the General Directorate of Military Survey.',
+                                        'project-title-8': 'Advanced CCTV System Implementation',
+                                        'project-desc-8': 'Supervised the installation of a comprehensive CCTV system to enhance security protocols.',
+                                        'project-title-9': 'Land Surveying Maps System',
+                                        'project-desc-9': 'Led the project to implement a new digital system for military land surveying maps.',
                     'education-certs-title': 'Education & Certifications',
                     'education-title': 'Education',
                     'degree': 'Bachelor of Computer Engineering',
